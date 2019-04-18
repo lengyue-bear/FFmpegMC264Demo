@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">FFmpegMC264Demo</string>
+
+    <string name="process">Start</string>
+    <string name="stop_process">Stop</string>
+
+    <string name="ffmpeg_cmd_pc0">ffmpeg -v 24 -probesize 0.2M -i rtsp://192.168.123.181/videodevice -vcodec mc264 -b:v 1.2M -r 30 -g 15 -an -f flv rtmp://192.168.1.7/show/stream2</string>
+    <string name="ffmpeg_cmd_pc1">ffmpeg -v 24 -probesize 0.2M -i rtsp://192.168.123.181/videodevice -vcodec mc264 -b:v 1.2M -r 30 -g 15 -an -f mpegts udp://192.168.123.181:5555?pkt_size=1316</string>
+
+</resources>
