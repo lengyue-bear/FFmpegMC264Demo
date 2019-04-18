@@ -14,3 +14,10 @@ You can run any ffmpeg command on your Java code using mc264 encoder.
 Example : ffmpeg -i INPUT -vcodec mc264 -b:v 2.0M -r 30 -g 15 -acodec copy -f mp4 OUTPUT
 
 
+## Referenced Links :
+* https://github.com/Kickflip/kickflip-android-sdk/blob/master/sdk/src/main/java/io/kickflip/sdk/av/FFmpegMuxer.java
+* https://stackoverflow.com/questions/24884827/possible-locations-for-sequence-picture-parameter-sets-for-h-264-stream/24890903#24890903
+* https://stackoverflow.com/questions/20909252/calculate-pts-before-frame-encoding-in-ffmpeg
+* http://leo.ugr.es/elvira/devel/Tutorial/Java/native1.1/implementing/index.html
+
+
