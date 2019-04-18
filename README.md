@@ -23,6 +23,9 @@ the MediaCodec should have the color format NV12.
 
 
 ## Referenced Links :
+* VideoKit :
+** https://github.com/inFullMobile/videokit-ffmpeg-android
+** https://github.com/IljaKosynkin/FFmpeg-Development-Kit
 * https://github.com/Kickflip/kickflip-android-sdk/blob/master/sdk/src/main/java/io/kickflip/sdk/av/FFmpegMuxer.java
 * https://stackoverflow.com/questions/24884827/possible-locations-for-sequence-picture-parameter-sets-for-h-264-stream/24890903#24890903
 * https://stackoverflow.com/questions/20909252/calculate-pts-before-frame-encoding-in-ffmpeg
