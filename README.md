@@ -15,8 +15,8 @@ Example : ffmpeg -i INPUT -vcodec mc264 -b:v 2.0M -r 30 -g 15 -acodec copy -f mp
 
 
 ## supported Color Space :
-ffmpeg INPUT stream : yuv420p
-MediaCodec : NV12
+* ffmpeg INPUT stream : yuv420p
+* MediaCodec : NV12
 
 The INPUT stream should have the color format YUV420Planar and
 the MediaCodec should have the color format NV12.
