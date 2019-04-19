@@ -1,6 +1,8 @@
 FFmpegMC264Demo
 ===============
 
+Now use mc264 instead of libx264.
+
 FFmpegMC264 is a ffmpeg android library built on MediaCodec.
 This library doesn't call ffmpeg executable file through exec().
 Instead this library has embedded the ffmpeg as souce code.
