@@ -24,6 +24,10 @@ Example : ffmpeg -i INPUT -vcodec mc264 -b:v 2.0M -r 30 -g 15 -acodec copy -f mp
 The INPUT stream should have the color format YUV420Planar.<br>
 The MediaCodec should have the color format YV12 [NV12].
 
+## Screenshot
+<p align="center">
+  <img src="./FFmpegMC264Demo-Screen.png" width="350" height="720">
+</p>
 
 ## Referenced Links :
 * Handling H.264 SPS / PPS 
