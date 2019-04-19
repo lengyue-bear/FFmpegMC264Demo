@@ -17,7 +17,7 @@ You can run any ffmpeg command on your Java code using mc264 encoder.
 Example : ffmpeg -i INPUT -vcodec mc264 -b:v 2.0M -r 30 -g 15 -acodec copy -f mp4 OUTPUT
 
 
-## supported Color Space :
+## supported Color Format :
 * ffmpeg INPUT stream : yuv420p
 * MediaCodec : NV12 (MediaCodecInfo.CodecCapabilities.COLOR_FormatYUV420SemiPlanar)
 
@@ -31,6 +31,9 @@ the MediaCodec should have the color format NV12.
 * https://stackoverflow.com/questions/24884827/possible-locations-for-sequence-picture-parameter-sets-for-h-264-stream/24890903#24890903
 * https://stackoverflow.com/questions/20909252/calculate-pts-before-frame-encoding-in-ffmpeg
 * http://leo.ugr.es/elvira/devel/Tutorial/Java/native1.1/implementing/index.html
+* Color Format :
+  - https://software.intel.com/en-us/ipp-dev-reference-pixel-and-planar-image-formats#FIG6-15
+  - https://en.wikipedia.org/wiki/YUV
 * VideoKit :
   - https://github.com/inFullMobile/videokit-ffmpeg-android
   - https://github.com/IljaKosynkin/FFmpeg-Development-Kit
