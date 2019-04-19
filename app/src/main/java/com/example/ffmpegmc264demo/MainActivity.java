@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void finished() {
-        Log.d( TAG, "finished() : Enter ...");
+        Toast.makeText(this, "ffmpeg finished !!!  (retcode = " + ffmpeg_retcode + ")", Toast.LENGTH_SHORT).show();
         spinnerContainer.setVisibility(View.GONE);
         spinnerActive = false;
 
