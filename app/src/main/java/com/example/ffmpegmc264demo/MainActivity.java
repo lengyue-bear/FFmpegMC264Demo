@@ -2,8 +2,15 @@ package com.example.ffmpegmc264demo;
 
 import android.Manifest;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.ImageFormat;
+import android.graphics.Rect;
+import android.graphics.YuvImage;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.preference.PreferenceManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -11,22 +18,47 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 
 import kim.yt.ffmpegmc264.MC264Encoder;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+        implements MC264Encoder.YUVFrameListener
+{
     private final static String TAG = "MainActivity";
     EditText urlSrc;
     private View spinnerContainer;
     private static boolean spinnerActive = false;
 
     private MyTask ffmpeg_task = null;
-    private static MC264Encoder mH264Encoder;
+    private static MC264Encoder mMC264Encoder;
     private static int ffmpeg_retcode = 0;
+
+    /*
+     * To draw a progress monitor view with YUVFrame
+     */
+    private static ImageView monitorView;
+    private static ArrayList mFrameList = new ArrayList();
+    private static int mWidth, mHeight;
+    private static Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if (msg.what == 1){
+                if( ! mFrameList.isEmpty() ) {
+                    byte[] frameData = (byte[]) mFrameList.get(0);
+                    drawYUVFrame( frameData, mWidth, mHeight );
+                    mFrameList.remove(0);
+                }
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +73,8 @@ public class MainActivity extends AppCompatActivity {
                 new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                 1337);
 
-        mH264Encoder = new MC264Encoder();
+        mMC264Encoder = new MC264Encoder();
+        mMC264Encoder.setYUVFrameListener(this, false);
 
         EditText usagelabel = findViewById(R.id.usageLabel);
         //usagelabel.setFocusable(false);         //show normally but not editable
@@ -58,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
         urlSrc = findViewById(R.id.editText4url);
         Button process = findViewById(R.id.btn_process);
         Button btn_stop = findViewById(R.id.btn_stop);
+        /*ImageView*/ monitorView = findViewById(R.id.imageView);
 
         String defaultCmd = getResources().getString(R.string.ffmpeg_cmd_pc1);
         String savedCmd = PreferenceManager.getDefaultSharedPreferences(this).getString("cmd", defaultCmd);
@@ -113,11 +147,11 @@ public class MainActivity extends AppCompatActivity {
         String fullUrl = new String("") + urlSrc.getText();
         saveCmd(fullUrl);
 
-        mH264Encoder.ffmpegStop();
-//        mH264Encoder.reset();     //Please, call mH264Encoder.reset() inside onPostExecute() not here
+        mMC264Encoder.ffmpegStop();
+//        mMC264Encoder.reset();     //Please, call mMC264Encoder.reset() inside onPostExecute() not here
 
         if( ++stopCnt >= 3 )
-            mH264Encoder.ffmpegForceStop();
+            mMC264Encoder.ffmpegForceStop();
     }
 
     void finished() {
@@ -139,18 +173,38 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(String... strings) {
-            mH264Encoder.H264MediaCodecReady();
-            ffmpeg_retcode = mH264Encoder.ffmpegRun(strings);
+            mMC264Encoder.H264MediaCodecReady();
+            ffmpeg_retcode = mMC264Encoder.ffmpegRun(strings);
             return null;
         }
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            mH264Encoder.reset();
+            mMC264Encoder.reset();
             final MainActivity activity = activityWeakReference.get();
             if (activity != null) {
                 activity.finished();
             }
         }
+    }
+
+    @Override
+    public void onYUVFrame(byte[] frameData, int width, int height) {
+        mFrameList.add( frameData );
+        mWidth = width;
+        mHeight = height;
+
+        Message msg = new Message();
+        msg.what = 1;
+        mHandler.sendMessage( msg );
+    }
+
+    public static void drawYUVFrame(byte[] frameData, int width, int height) {
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        YuvImage yuvImage = new YuvImage(frameData, ImageFormat.NV21, width, height, null);
+        yuvImage.compressToJpeg(new Rect(0, 0, width, height), 50, out);
+        byte[] imageBytes = out.toByteArray();
+        Bitmap image = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+        monitorView.setImageBitmap(image);
     }
 }
