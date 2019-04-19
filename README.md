@@ -9,8 +9,8 @@ Instead this library has embedded the ffmpeg as souce code.
 So, you can call the ffmpeg through the API : 
 * int retcode = mMC264Encoder.ffmpegRun(cmdString);
 
-In C side, an encoder module - mc264.c - was added into ffmpeg libavcodec.
-In java side, an encoder controller class - MC264Encode.java - was added over android MediaCodec (H.264 encoder only).
+For this, in C side, an encoder module - mc264.c - was added into ffmpeg libavcodec.<br>
+In java side, an encoder controller class - MC264Encoder.java - was added over android MediaCodec (H.264 encoder only).
 
 You can run any ffmpeg command on your Java code using mc264 encoder.
 
