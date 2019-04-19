@@ -1,20 +1,20 @@
 FFmpegMC264Demo
 ===============
 
-Now use mc264 instead of libx264.
+FFmpegMC264 is a ffmpeg android library powered by MediaCodec HW accelated encoder.<br> 
+Now use 'mc264' instead of 'libx264' in runing ffmpeg command in your code.
 
-FFmpegMC264 is a ffmpeg android library built on MediaCodec.
-This library doesn't call ffmpeg executable file through exec().
-Instead this library has embedded the ffmpeg as souce code.
-So, you can call the ffmpeg through the API : 
+FFmpegMC264 library doesn't call ffmpeg executable file through exec().
+Instead this library has embedded the ffmpeg as an API function.
+So, you can call the ffmpeg like this : 
 * int retcode = mMC264Encoder.ffmpegRun(cmdString);
-
+  - cmdString example : 
+  - ffmpeg -i INPUT -vcodec mc264 -b:v 2.0M -r 30 -g 15 -acodec copy -f mp4 OUTPUT
+  
 For this, in C side, an encoder module - mc264.c - was added into ffmpeg libavcodec.<br>
 In java side, an encoder controller class - MC264Encoder.java - was added over android MediaCodec (H.264 encoder only).
 
-You can run any ffmpeg command on your Java code using mc264 encoder.
-
-Example : ffmpeg -i INPUT -vcodec mc264 -b:v 2.0M -r 30 -g 15 -acodec copy -f mp4 OUTPUT
+Enjoy ffmpeg powered by MediaCodec HW accelated encoder.
 
 
 ## Supported Color Format :
