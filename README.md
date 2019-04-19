@@ -17,7 +17,7 @@ You can run any ffmpeg command on your Java code using mc264 encoder.
 Example : ffmpeg -i INPUT -vcodec mc264 -b:v 2.0M -r 30 -g 15 -acodec copy -f mp4 OUTPUT
 
 
-## supported Color Format :
+## Supported Color Format :
 * ffmpeg INPUT stream : yuv420p
 * MediaCodec : YV12 [NV12] (MediaCodecInfo.CodecCapabilities.COLOR_FormatYUV420SemiPlanar)
 
