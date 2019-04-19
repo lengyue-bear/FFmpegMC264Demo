@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
                 new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                 1337);
 
-        mH264Encoder = new MC264Encoder();   //should be before new LibFFMpeg(); because libavcodec call putYUVFrameData() during new LibFFMpeg();
+        mH264Encoder = new MC264Encoder();
 
         EditText usagelabel = findViewById(R.id.usageLabel);
         //usagelabel.setFocusable(false);         //show normally but not editable
