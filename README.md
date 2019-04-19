@@ -21,8 +21,8 @@ Enjoy ffmpeg powered by MediaCodec HW accelated encoder.
 * ffmpeg INPUT stream : yuv420p
 * MediaCodec : YV12 [NV12] (MediaCodecInfo.CodecCapabilities.COLOR_FormatYUV420SemiPlanar)
 
-The INPUT stream should have the color format YUV420Planar.<br>
-The MediaCodec should have the color format YV12 [NV12].
+The INPUT stream should have the color format YUV420Planar. Or use '-pix_fmt yuv420p' option for the INPUT.<br>
+The MediaCodec should have the color format YV12 [NV12]. (Other formats will be supported later)
 
 ## Screenshot
 <p align="center">
