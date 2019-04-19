@@ -19,10 +19,10 @@ Example : ffmpeg -i INPUT -vcodec mc264 -b:v 2.0M -r 30 -g 15 -acodec copy -f mp
 
 ## supported Color Format :
 * ffmpeg INPUT stream : yuv420p
-* MediaCodec : NV12 (MediaCodecInfo.CodecCapabilities.COLOR_FormatYUV420SemiPlanar)
+* MediaCodec : YV12 [NV12] (MediaCodecInfo.CodecCapabilities.COLOR_FormatYUV420SemiPlanar)
 
-The INPUT stream should have the color format YUV420Planar and
-the MediaCodec should have the color format NV12.
+The INPUT stream should have the color format YUV420Planar.<br>
+The MediaCodec should have the color format YV12 [NV12].
 
 
 ## Referenced Links :
@@ -33,6 +33,7 @@ the MediaCodec should have the color format NV12.
 * http://leo.ugr.es/elvira/devel/Tutorial/Java/native1.1/implementing/index.html
 * Color Format :
   - https://software.intel.com/en-us/ipp-dev-reference-pixel-and-planar-image-formats#FIG6-15
+  - https://developer.android.com/reference/android/graphics/ImageFormat.html#YV12
   - https://en.wikipedia.org/wiki/YUV
 * VideoKit :
   - https://github.com/inFullMobile/videokit-ffmpeg-android
