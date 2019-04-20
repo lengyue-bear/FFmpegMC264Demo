@@ -1,6 +1,8 @@
 FFmpegMC264Demo
 ===============
 
+Use 'mc264' instead of 'libx264'.
+
 FFmpegMC264 is a ffmpeg android library powered by MediaCodec HW accelated encoder.<br> 
 Now use 'mc264' instead of 'libx264' in runing ffmpeg command in your code.
 
