@@ -19,6 +19,28 @@ In java side, an encoder controller class - MC264Encoder.java - was added over a
 Enjoy ffmpeg powered by MediaCodec HW accelated encoder.
 
 
+## The APIs you have to know : 
+
+### prepare an instance
+* mMC264Encoder = new MC264Encoder();
+* mMC264Encoder.setYUVFrameListener(this, false);  - optional API
+
+### prepare an AsyncTask
+* ffmpeg_task = new MyTask(this);
+* ffmpeg_task.execute( ffmpegCmdStringArray );
+
+### run the instance in the task :: doInBackground()
+* mMC264Encoder.H264MediaCodecReady();
+* mMC264Encoder.ffmpegRun( strings );
+
+### stop
+* mMC264Encoder.ffmpegStop();
+* mMC264Encoder.ffmpegForceStop(); - optional API to enforce stop
+
+### post stop
+* mMC264Encoder.reset();
+
+
 ## Supported Color Format :
 * ffmpeg INPUT stream : yuv420p
 * MediaCodec : YV12 [NV12] (MediaCodecInfo.CodecCapabilities.COLOR_FormatYUV420SemiPlanar)
